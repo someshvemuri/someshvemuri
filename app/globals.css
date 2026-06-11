@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  @apply scroll-smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-manrope), sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-fraunces), serif;
+  letter-spacing: -0.02em;
+}
+
+.surface {
+  @apply rounded-2xl border border-white/70 bg-white/75 backdrop-blur-md shadow-[0_10px_40px_rgba(15,23,42,0.08)];
+}
+
+a, button {
+  @apply transition-all duration-300;
+}
