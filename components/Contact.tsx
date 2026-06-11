@@ -8,7 +8,7 @@ export default function Contact() {
     <section id="contact" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="text-4xl font-bold mb-4 text-slate-900">Let's Connect</h2>
+          <h2 className="text-4xl font-bold mb-4 text-slate-900">{"Let's connect"}</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-slate-900 to-emerald-500 rounded-full mb-12" />
         </motion.div>
 
@@ -18,8 +18,7 @@ export default function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          I'm always interested in discussing software engineering, system design, and new opportunities. Feel
-          free to reach out!
+          {"I'm always interested in discussing software engineering, system design, and new opportunities. Feel free to reach out!"}
         </motion.p>
 
         <motion.div
