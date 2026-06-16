@@ -80,9 +80,11 @@ export default function VaultFilePage({ params }: PageProps) {
 
   // Excalidraw file
   if (file.isExcalidraw) {
+    const excalidrawHeadings = extractHeadings(file.content ?? '');
     return (
       <div className="flex">
-        <main className="flex-1 min-w-0 max-w-4xl px-8 py-10">
+        <main className="flex-1 min-w-0 px-8 py-10 overflow-hidden">
+          {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
             <Link href="/vault" className="hover:text-white transition-colors">
               <Home className="w-3.5 h-3.5" />
@@ -91,7 +93,7 @@ export default function VaultFilePage({ params }: PageProps) {
               <span key={crumb.href} className="flex items-center gap-1.5">
                 <ChevronRight className="w-3.5 h-3.5" />
                 {i === breadcrumbs.length - 2 ? (
-                  <span className="text-[#e6edf3]">{crumb.label}</span>
+                  <span className="text-[#e6edf3] capitalize">{crumb.label}</span>
                 ) : (
                   <Link href={crumb.href} className="hover:text-white transition-colors capitalize">
                     {crumb.label}
@@ -100,16 +102,31 @@ export default function VaultFilePage({ params }: PageProps) {
               </span>
             ))}
           </nav>
-          <div className="flex items-center gap-3 mb-6">
-            <ImageIcon className="w-6 h-6 text-[#58a6ff]" />
+
+          {/* Title + badge */}
+          <div className="flex items-center gap-3 mb-2">
             <h1 className="text-2xl font-semibold text-[#e6edf3]">{file.name}</h1>
+            <span className="text-xs bg-[#161b22] border border-[#30363d] text-[#8b949e] px-2 py-0.5 rounded-full">
+              Excalidraw
+            </span>
           </div>
-          <div className="border border-[#21262d] rounded-xl p-8 bg-[#161b22] text-center text-[#8b949e]">
-            <ImageIcon className="w-12 h-12 mx-auto mb-4 opacity-40" />
-            <p className="font-medium">Excalidraw Diagram</p>
-            <p className="text-sm mt-2 font-mono opacity-60">{file.path}</p>
-          </div>
+          <p className="text-sm text-[#8b949e] mb-8">
+            Interactive diagram — open in Obsidian to view the drawing. Text elements extracted below.
+          </p>
+
+          {/* Text elements from the diagram */}
+          {file.content ? (
+            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6 text-[#c9d1d9] text-sm leading-relaxed whitespace-pre-wrap font-mono">
+              {file.content}
+            </div>
+          ) : (
+            <div className="border border-[#21262d] rounded-xl p-8 bg-[#161b22] text-center text-[#8b949e]">
+              <ImageIcon className="w-12 h-12 mx-auto mb-4 opacity-40" />
+              <p className="text-sm">No text elements found in this diagram.</p>
+            </div>
+          )}
         </main>
+        <VaultTOC headings={excalidrawHeadings} />
       </div>
     );
   }

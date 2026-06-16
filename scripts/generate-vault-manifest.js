@@ -67,7 +67,7 @@ function readVaultFilesRecursive(dir, baseDir = '') {
       entry.name.endsWith('.excalidraw') ||
       entry.name.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i)
     ) {
-      const isExcalidraw = entry.name.endsWith('.excalidraw');
+      let isExcalidraw = entry.name.endsWith('.excalidraw');
       let content = '';
       let tags = [];
       let links = [];
@@ -76,9 +76,24 @@ function readVaultFilesRecursive(dir, baseDir = '') {
         try {
           const fileContent = fs.readFileSync(fullPath, 'utf-8');
           const { data, content: mdContent } = matter(fileContent);
-          content = mdContent;
           tags = extractTags(data);
-          links = extractWikiLinks(content);
+
+          // Detect Obsidian Excalidraw plugin .md files by frontmatter
+          const isExcalidrawPlugin =
+            data['excalidraw-plugin'] != null ||
+            (Array.isArray(data.tags) && data.tags.includes('excalidraw'));
+
+          if (isExcalidrawPlugin) {
+            isExcalidraw = true;
+            // Extract only the Text Elements section — strip element ID markers like ^Vcd44HRk
+            const textMatch = mdContent.match(/##\s*Text Elements\s*\n([\s\S]*?)(?:\n##|\n# |$)/);
+            content = textMatch
+              ? textMatch[1].replace(/\^[A-Za-z0-9]{8,}\s*/g, '').trim()
+              : '';
+          } else {
+            content = mdContent;
+            links = extractWikiLinks(content);
+          }
         } catch (error) {
           console.error(`Error reading file ${fullPath}:`, error.message);
         }
