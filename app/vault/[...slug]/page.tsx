@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { loadVaultManifest, getFileBySlug, extractHeadings, buildBreadcrumb, getAllVaultPaths, buildWikiLinkMap } from '@/lib/vault-utils';
 import VaultContent from '@/components/vault/VaultContent';
 import VaultTOC from '@/components/vault/VaultTOC';
+import ExcalidrawViewer from '@/components/vault/ExcalidrawViewer';
 
 interface PageProps {
   params: { slug: string[] };
@@ -112,14 +113,17 @@ export default function VaultFilePage({ params }: PageProps) {
           <p className="text-xs text-[#555] mb-8">
             Interactive diagram — open in Obsidian to view the drawing. Text elements below.
           </p>
-          {file.content ? (
+          {/* Diagram or fallback text */}
+          {file.excalidrawScene ? (
+            <ExcalidrawViewer sceneData={file.excalidrawScene} />
+          ) : file.content ? (
             <pre className="bg-[#1e1e1e] border-l-2 border-[#444] p-5 text-[#d4d4d4] text-sm leading-relaxed whitespace-pre-wrap overflow-x-auto">
               {file.content}
             </pre>
           ) : (
             <div className="p-8 text-center text-[#555] border border-[#2a2a2a] rounded">
               <ImageIcon className="w-10 h-10 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">No text elements found in this diagram.</p>
+              <p className="text-sm">No diagram data found.</p>
             </div>
           )}
         </main>

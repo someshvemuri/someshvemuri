@@ -9,6 +9,7 @@ export interface VaultFile {
   tags?: string[];
   links?: string[];
   isExcalidraw?: boolean;
+  excalidrawScene?: string | null; // JSON string of the decompressed Excalidraw scene
 }
 
 export interface VaultManifest {

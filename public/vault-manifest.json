@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "timestamp": "2026-06-16T17:33:31.332Z",
+  "timestamp": "2026-06-16T18:36:25.516Z",
   "files": [
     {
       "path": "Excalidraw",
@@ -16,7 +16,8 @@
         "excalidraw"
       ],
       "links": [],
-      "isExcalidraw": true
+      "isExcalidraw": true,
+      "excalidrawScene": null
     },
     {
       "path": "Images",
@@ -30,7 +31,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "Images/Pasted image 20260614235252.png",
@@ -39,7 +41,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "Images/Pasted image 20260615005709.png",
@@ -48,7 +51,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "Images/Pasted image 20260615012624.png",
@@ -57,7 +61,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "Images/Pasted image 20260615014517.png",
@@ -66,7 +71,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "Images/Pasted image 20260615014553.png",
@@ -75,7 +81,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "LC",
@@ -100,7 +107,8 @@
         "Khan's Algorithm",
         "BFS"
       ],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "LC/815.md",
@@ -112,7 +120,8 @@
         "Pasted image 20260615014517.png|590",
         "Pasted image 20260615014553.png"
       ],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "LC/I-1.md",
@@ -126,7 +135,8 @@
         "Database",
         "General Questions"
       ],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "LC/Introduction & Project Explaination.md",
@@ -135,7 +145,8 @@
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     },
     {
       "path": "LC/Spring Concepts.md",
@@ -146,7 +157,8 @@
       "links": [
         "spring boot"
       ],
-      "isExcalidraw": false
+      "isExcalidraw": false,
+      "excalidrawScene": null
     }
   ]
 }

@@ -9,6 +9,14 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
+let decompressLZ;
+try {
+  const lzString = require('lz-string');
+  decompressLZ = (str) => lzString.decompressFromBase64(str);
+} catch {
+  decompressLZ = null;
+}
+
 const VAULT_DIR = path.join(process.cwd(), 'public', 'vault');
 const OUTPUT_FILE = path.join(process.cwd(), 'public', 'vault-manifest.json');
 
@@ -71,6 +79,7 @@ function readVaultFilesRecursive(dir, baseDir = '') {
       let content = '';
       let tags = [];
       let links = [];
+      let excalidrawScene = null;
 
       if (entry.name.endsWith('.md')) {
         try {
@@ -90,6 +99,24 @@ function readVaultFilesRecursive(dir, baseDir = '') {
             content = textMatch
               ? textMatch[1].replace(/\^[A-Za-z0-9]{8,}\s*/g, '').trim()
               : '';
+
+            // Extract and decompress the Drawing JSON for static rendering
+            if (decompressLZ) {
+              try {
+                const drawingMatch = mdContent.match(/```compressed-json\n([\s\S]+?)\n```/);
+                if (drawingMatch) {
+                  const compressed = drawingMatch[1].replace(/\s+/g, '');
+                  const decompressed = decompressLZ(compressed);
+                  if (decompressed) {
+                    const scene = JSON.parse(decompressed);
+                    // Store only elements + appState (not the full file data)
+                    excalidrawScene = JSON.stringify({ elements: scene.elements || [], appState: scene.appState || {} });
+                  }
+                }
+              } catch (e) {
+                console.warn(`  Could not decompress Excalidraw scene for ${relativePath}:`, e.message);
+              }
+            }
           } else {
             content = mdContent;
             links = extractWikiLinks(content);
@@ -107,6 +134,7 @@ function readVaultFilesRecursive(dir, baseDir = '') {
         tags,
         links,
         isExcalidraw,
+        excalidrawScene,
       });
     }
   }
