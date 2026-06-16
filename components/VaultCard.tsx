@@ -19,7 +19,7 @@ export default function VaultCard() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <Link href="/vault" className="group block">
+          <Link href="/vault/my-vault" className="group block">
             <div className="border border-slate-200 rounded-2xl p-8 hover:border-slate-400 hover:shadow-xl transition-all duration-300 bg-white hover:bg-slate-50">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4 mb-6">

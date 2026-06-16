@@ -14,7 +14,11 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<Set<string>>(() => {
     // Auto-expand folders that contain the current path
-    const current = pathname.replace('/vault/', '').replace('/vault', '');
+    const current = pathname
+      .replace('/vault/my-vault/', '')
+      .replace('/vault/my-vault', '')
+      .replace('/vault/', '')
+      .replace('/vault', '');
     const parts = current.split('/');
     const initialExpanded = new Set<string>();
     parts.forEach((_, i) => {
@@ -47,7 +51,11 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
     });
 
   const isActive = (filePath: string) => {
-    const currentSlug = pathname.replace('/vault/', '').replace('/vault', '');
+    const currentSlug = pathname
+      .replace('/vault/my-vault/', '')
+      .replace('/vault/my-vault', '')
+      .replace('/vault/', '')
+      .replace('/vault', '');
     return currentSlug === filePath;
   };
 
@@ -76,7 +84,7 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
           </button>
         ) : (
           <Link
-            href={`/vault/${file.path}`}
+            href={`/vault/my-vault/${file.path}`}
             className={`flex items-center gap-1.5 px-3 py-1.5 text-sm transition-colors ${
               active
                 ? 'text-white bg-[#1f6feb]/20 border-r-2 border-[#1f6feb]'
@@ -102,7 +110,7 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
     <aside className="w-60 flex-shrink-0 h-screen sticky top-0 overflow-y-auto bg-[#0d1117] border-r border-[#21262d] flex flex-col">
       {/* Logo / Title */}
       <div className="p-4 border-b border-[#21262d]">
-        <Link href="/vault" className="flex items-center gap-2 text-white font-semibold hover:opacity-80">
+        <Link href="/vault/my-vault" className="flex items-center gap-2 text-white font-semibold hover:opacity-80">
           <BookOpen className="w-5 h-5 text-[#58a6ff]" />
           <span>Somesh&apos;s Vault</span>
         </Link>

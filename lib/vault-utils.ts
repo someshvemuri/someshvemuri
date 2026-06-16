@@ -68,12 +68,12 @@ export function extractHeadings(markdown: string): Heading[] {
 }
 
 export function buildBreadcrumb(slug: string[]): { label: string; href: string }[] {
-  const crumbs: { label: string; href: string }[] = [{ label: 'vault', href: '/vault' }];
+  const crumbs: { label: string; href: string }[] = [{ label: 'vault', href: '/vault/my-vault' }];
 
   slug.forEach((part, i) => {
     crumbs.push({
       label: part.replace(/-/g, ' ').replace(/_/g, ' '),
-      href: '/vault/' + slug.slice(0, i + 1).join('/'),
+      href: '/vault/my-vault/' + slug.slice(0, i + 1).join('/'),
     });
   });
 

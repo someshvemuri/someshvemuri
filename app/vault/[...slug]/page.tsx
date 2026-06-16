@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Home, ChevronRight, ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 import { loadVaultManifest, getFileBySlug, extractHeadings, buildBreadcrumb, getAllVaultPaths, buildWikiLinkMap } from '@/lib/vault-utils';
@@ -11,12 +11,13 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const manifest = loadVaultManifest();
-  return getAllVaultPaths(manifest.files).map((slug) => ({ slug }));
+  return getAllVaultPaths(manifest.files).map((slug) => ({ slug: ['my-vault', ...slug] }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const manifest = loadVaultManifest();
-  const file = getFileBySlug(manifest.files, params.slug);
+  const normalizedSlug = params.slug[0] === 'my-vault' ? params.slug.slice(1) : params.slug;
+  const file = getFileBySlug(manifest.files, normalizedSlug);
   return {
     title: file ? `${file.name} — Somesh's Vault` : "Somesh's Vault",
   };
@@ -24,11 +25,27 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default function VaultFilePage({ params }: PageProps) {
   const manifest = loadVaultManifest();
-  const file = getFileBySlug(manifest.files, params.slug);
+  const normalizedSlug = params.slug[0] === 'my-vault' ? params.slug.slice(1) : params.slug;
+
+  if (normalizedSlug.length === 0) {
+    const firstNote = manifest.files.find(
+      (f) => f.type === 'file' && f.path.endsWith('.md') && !f.path.startsWith('Images/'),
+    );
+    if (firstNote) {
+      redirect(`/vault/my-vault/${firstNote.path}`);
+    }
+    const firstFile = manifest.files.find((f) => f.type === 'file');
+    if (firstFile) {
+      redirect(`/vault/my-vault/${firstFile.path}`);
+    }
+    notFound();
+  }
+
+  const file = getFileBySlug(manifest.files, normalizedSlug);
 
   if (!file) notFound();
 
-  const breadcrumbs = buildBreadcrumb(params.slug);
+  const breadcrumbs = buildBreadcrumb(normalizedSlug);
 
   // Folder view: list children
   if (file.type === 'folder') {
@@ -43,7 +60,7 @@ export default function VaultFilePage({ params }: PageProps) {
         <main className="flex-1 min-w-0 max-w-4xl px-8 py-10">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-            <Link href="/vault" className="hover:text-white transition-colors">
+            <Link href="/vault/my-vault" className="hover:text-white transition-colors">
               <Home className="w-3.5 h-3.5" />
             </Link>
             {breadcrumbs.slice(1).map((crumb, i) => (
@@ -65,7 +82,7 @@ export default function VaultFilePage({ params }: PageProps) {
             {children.map((child) => (
               <Link
                 key={child.path}
-                href={`/vault/${child.path}`}
+                href={`/vault/my-vault/${child.path}`}
                 className="flex items-center gap-3 p-4 rounded-lg border border-[#21262d] hover:border-[#388bfd] hover:bg-[#161b22] transition-all text-[#8b949e] hover:text-white"
               >
                 <span className="capitalize font-medium">{child.name}</span>
@@ -86,7 +103,7 @@ export default function VaultFilePage({ params }: PageProps) {
         <main className="flex-1 min-w-0 px-8 py-10 overflow-hidden">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-            <Link href="/vault" className="hover:text-white transition-colors">
+            <Link href="/vault/my-vault" className="hover:text-white transition-colors">
               <Home className="w-3.5 h-3.5" />
             </Link>
             {breadcrumbs.slice(1).map((crumb, i) => (
@@ -141,7 +158,7 @@ export default function VaultFilePage({ params }: PageProps) {
       <main className="flex-1 min-w-0 px-8 py-10 overflow-hidden">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-          <Link href="/vault" className="hover:text-white transition-colors">
+          <Link href="/vault/my-vault" className="hover:text-white transition-colors">
             <Home className="w-3.5 h-3.5" />
           </Link>
           {breadcrumbs.slice(1).map((crumb, i) => (

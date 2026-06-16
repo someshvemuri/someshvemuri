@@ -22,7 +22,7 @@ export default function Header() {
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Vault', href: '/vault' },
+    { label: 'Vault', href: '/vault/my-vault' },
     { label: 'Contact', href: '#contact' },
   ];
 

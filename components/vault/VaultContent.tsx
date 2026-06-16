@@ -17,7 +17,7 @@ function slugify(text: string) {
     .replace(/-+/g, '-');
 }
 
-// Resolve [[wiki links]] to /vault/ paths
+// Resolve [[wiki links]] to /vault/my-vault/ paths
 // Resolve ![[image.png]] Obsidian embeds to <img> tags
 function processObsidianSyntax(content: string, wikiLinkMap: Record<string, string> = {}) {
   // Image embeds first: ![[filename.png]]
@@ -28,7 +28,7 @@ function processObsidianSyntax(content: string, wikiLinkMap: Record<string, stri
       return `![${cleanSrc}](/vault/Images/${encodeURIComponent(cleanSrc)})`;
     }
     // Otherwise treat as a wiki link embed
-    const href = '/vault/' + cleanSrc.replace(/\s+/g, '-');
+    const href = '/vault/my-vault/' + cleanSrc.replace(/\s+/g, '-');
     return `[${cleanSrc}](${href})`;
   });
   // Wiki links: [[Note Name]] or [[Note Name|alias]]
@@ -38,7 +38,9 @@ function processObsidianSyntax(content: string, wikiLinkMap: Record<string, stri
     const display = alias?.trim() || targetTrimmed;
     // Try to resolve to actual path via wikiLinkMap
     const resolved = wikiLinkMap[targetTrimmed.toLowerCase()];
-    const href = resolved ? `/vault/${resolved}` : `/vault/${targetTrimmed.replace(/\s+/g, '-')}`;
+    const href = resolved
+      ? `/vault/my-vault/${resolved}`
+      : `/vault/my-vault/${targetTrimmed.replace(/\s+/g, '-')}`;
     return `[${display}](${href})`;
   });
   return processed;
