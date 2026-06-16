@@ -1,0 +1,66 @@
+name: Sync Vault Submodule
+
+on:
+  schedule:
+    # Run every day at midnight UTC
+    - cron: '0 0 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Custom commit message'
+        required: false
+        default: 'Sync vault from my-vault repository'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout portfolio repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update vault submodule
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Update the submodule to the latest commit
+          git submodule update --remote --merge public/vault
+          
+          # Check if there are any changes
+          if git diff --quiet; then
+            echo "✅ Vault is already up to date"
+          else
+            echo "📚 Vault has been updated"
+            git add public/vault
+            git commit -m "🔄 Sync vault: ${{ github.event.inputs.message || 'Automatic sync from my-vault' }}"
+            git push origin main
+          fi
+
+      - name: Build updated vault manifest
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit vault manifest
+        run: |
+          if git diff public/vault-manifest.json; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/vault-manifest.json
+            git commit -m "🔨 Regenerate vault manifest"
+            git push origin main
+          fi
