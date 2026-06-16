@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "timestamp": "2026-06-16T17:08:44.013Z",
+  "timestamp": "2026-06-16T17:19:25.485Z",
   "files": [
     {
       "path": "Excalidraw",
@@ -8,92 +8,143 @@
       "type": "folder"
     },
     {
-      "path": "Excalidraw/System-Architecture.excalidraw",
-      "name": "System-Architecture",
+      "path": "Excalidraw/Topological Order.md",
+      "name": "Topological Order",
+      "type": "file",
+      "content": "==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'\r\n\r\n\r\n# Excalidraw Data\r\n\r\n## Text Elements\r\n0 -> 1 we need to do 0 in order to do 1\r\n1 -> 2\r\n2 -> 3\r\n3 -> 0\r\n\r\nso, we need to do 0  to do 1, so, we check if we can do 0 then we need to do 3 then 2 then 1 and then 0\r\n\r\nso, Here it's a deadlock -> so, You can't do any of there courses ^Vcd44HRk\r\n\r\n1 ^4hfjt8lM\r\n\r\n0 ^iHghFKiu\r\n\r\n3 ^kvtuo0Q8\r\n\r\n2 ^sJOZsFcq\r\n\r\n0 -> 1 we need to do 0 in order to do 1\r\n1 -> 2\r\n2 -> 3\r\n\r\n\r\n ^FbKBOxVq\r\n\r\n1 ^wgJGNXDb\r\n\r\n0 ^cKlqLVx3\r\n\r\n2 ^wWRMpn7I\r\n\r\n1 ^SVQw2zMD\r\n\r\n3 ^lEXSlBlx\r\n\r\nnothing ^Ai4o2OCg\r\n\r\nnothing\r\n\r\n ^VUi4zy10\r\n\r\nHere, we see 1 -> 1 needs 0 and 0 needs nothing and can be done\r\n\r\nso, we check 2 and 2 needs 1 and 1 can be done -> so, 2 can also be done\r\n\r\nwe check 3 and 3 needs 2 and 2 can be done\r\n\r\nso, All courses can be done\r\n\r\n\r\nwhat we are doing here is doing a dfs and going until a course where there is no pre-requisite and doing it and storing it's done\r\nand finishing all pre-requisites to finish this course. You find the deadlock/cycle if any current dfs course comes twice\r\n\r\n\r\nAlgorithm \r\n\r\n1. we store it this way 0 : [] what pre-requisties this course need and go into that rabbit hole until we don't have any courses\r\n2. we use state \r\n    0 - not visited yet\r\n    1 - currently in dfs path\r\n    2 - finsihed\r\n\r\nwhen we visit a prerequisite course and if it is in state 0 -> we call dfs and make state as 1 as this is currently added to path\r\nand if it is state 1 then that means this node is already there is path and a cycle is formed \r\nstate - 2 means course completed and no need to take dfs() as it is done\r\n\r\nAfter all pre-requsites are done then we this course as 2 state and put it in the order\r\n\r\nTopological Order : It is an order where u .. v then there will be edge from u to v. All edges will be from left to right only.\r\n\r\n                                \r\n                                                    0         1         2         3 \r\n ^ez9UStXY\r\n\r\n0 is done before 1 and 1 is done before 2 and 2 is done before 3 and this is an order we do courses and this is what is \r\ntopological order where every (u,v) where edge goes from left node to some right node\r\n\r\n\r\n\r\n ^zXAvIDCz\r\n\r\n%%\r\n## Drawing\r\n```compressed-json\r\n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\r\n```\r\n%%",
+      "tags": [
+        "excalidraw"
+      ],
+      "links": [],
+      "isExcalidraw": false
+    },
+    {
+      "path": "Images",
+      "name": "Images",
+      "type": "folder"
+    },
+    {
+      "path": "Images/Pasted image 20260614235240.png",
+      "name": "Pasted image 20260614235240.png",
       "type": "file",
       "content": "",
       "tags": [],
       "links": [],
-      "isExcalidraw": true
-    },
-    {
-      "path": "Learning-JavaScript.md",
-      "name": "Learning-JavaScript",
-      "type": "file",
-      "content": "\r\n# Learning JavaScript\r\n\r\nThis is where I track my learning journey with JavaScript.\r\n\r\n## Key Concepts\r\n\r\n### Variables & Types\r\n- `let` and `const` for variable declaration\r\n- Dynamic typing in JavaScript\r\n- Primitive types: string, number, boolean, null, undefined\r\n\r\n### Functions\r\nJavaScript has multiple ways to define functions:\r\n\r\n```javascript\r\n// Function declaration\r\nfunction greet(name) {\r\n  return `Hello, ${name}!`;\r\n}\r\n\r\n// Arrow function\r\nconst add = (a, b) => a + b;\r\n```\r\n\r\n### Async/Await\r\nModern way to handle asynchronous operations:\r\n\r\n```javascript\r\nasync function fetchData() {\r\n  try {\r\n    const response = await fetch('/api/data');\r\n    const data = await response.json();\r\n    return data;\r\n  } catch (error) {\r\n    console.error('Error:', error);\r\n  }\r\n}\r\n```\r\n\r\n## Resources\r\n\r\n- [MDN Web Docs](https://developer.mozilla.org/)\r\n- [[Learning Node.js]] - Node.js specific concepts\r\n- [[Web Development]] - General web development notes\r\n\r\n## Progress\r\n\r\n- [x] Variables and types\r\n- [x] Functions\r\n- [x] Promises and async/await\r\n- [ ] Design patterns\r\n- [ ] Testing frameworks\r\n",
-      "tags": [
-        "learning",
-        "programming",
-        "javascript"
-      ],
-      "links": [
-        "Learning Node.js",
-        "Web Development"
-      ],
       "isExcalidraw": false
     },
     {
-      "path": "Notes",
-      "name": "Notes",
-      "type": "folder"
-    },
-    {
-      "path": "Notes/Algorithms.md",
-      "name": "Algorithms",
+      "path": "Images/Pasted image 20260614235252.png",
+      "name": "Pasted image 20260614235252.png",
       "type": "file",
-      "content": "\r\n# Understanding Algorithms\r\n\r\n## What are Algorithms?\r\n\r\nAn algorithm is a step-by-step procedure for solving a problem or accomplishing a task.\r\n\r\n### Key Characteristics\r\n- **Definite** - Clear and unambiguous steps\r\n- **Finite** - Must terminate in finite time\r\n- **Effective** - Produces correct results\r\n- **Efficient** - Optimized for time and space\r\n\r\n## Common Algorithm Types\r\n\r\n### Sorting Algorithms\r\n- Bubble Sort - O(n²)\r\n- Quick Sort - O(n log n)\r\n- Merge Sort - O(n log n)\r\n- Heap Sort - O(n log n)\r\n\r\n### Searching Algorithms\r\n- Linear Search - O(n)\r\n- Binary Search - O(log n)\r\n- Breadth-First Search (BFS)\r\n- Depth-First Search (DFS)\r\n\r\n### Graph Algorithms\r\n- Dijkstra's - Shortest path\r\n- Kruskal's - Minimum spanning tree\r\n- Floyd-Warshall - All pairs shortest path\r\n\r\n## Complexity Analysis\r\n\r\n### Big O Notation\r\n\r\n| Notation | Name | Example |\r\n|----------|------|---------|\r\n| O(1) | Constant | Array indexing |\r\n| O(log n) | Logarithmic | Binary search |\r\n| O(n) | Linear | Simple loop |\r\n| O(n log n) | Linearithmic | Merge sort |\r\n| O(n²) | Quadratic | Nested loops |\r\n| O(2ⁿ) | Exponential | Recursive fibonacci |\r\n\r\n## Practice Problems\r\n\r\n- [ ] Implement quicksort\r\n- [ ] Solve LeetCode medium problems\r\n- [ ] Understand dynamic programming\r\n- [ ] Master graph algorithms\r\n\r\n## Resources\r\n\r\n- [Big O Cheatsheet](https://www.bigocheatsheet.com/)\r\n- Cracking the Coding Interview\r\n- LeetCode algorithms section\r\n",
-      "tags": [
-        "learning",
-        "programming",
-        "concepts"
-      ],
+      "content": "",
+      "tags": [],
       "links": [],
       "isExcalidraw": false
     },
     {
-      "path": "Portfolio-Project.md",
-      "name": "Portfolio-Project",
+      "path": "Images/Pasted image 20260615005709.png",
+      "name": "Pasted image 20260615005709.png",
       "type": "file",
-      "content": "\r\n# Portfolio Project\r\n\r\nBuilding my personal portfolio website with Next.js and React.\r\n\r\n## Objectives\r\n\r\n1. Showcase my projects and experience\r\n2. Create an Obsidian-like vault viewer\r\n3. Implement interactive components\r\n4. Optimize for performance\r\n\r\n## Architecture\r\n\r\n```\r\nportfolio/\r\n├── app/          - Next.js app directory\r\n├── components/   - React components\r\n├── lib/          - Utility functions\r\n├── public/       - Static assets & vault\r\n└── styles/       - CSS styles\r\n```\r\n\r\n## Stack\r\n\r\n- **Frontend:** React 18, Next.js 14\r\n- **Styling:** Tailwind CSS\r\n- **Animations:** Framer Motion\r\n- **Icons:** Lucide React\r\n\r\n## Current Status\r\n\r\n- [x] Basic portfolio structure\r\n- [x] Hero section\r\n- [x] Experience section\r\n- [x] Projects section\r\n- [x] My Vault integration\r\n- [ ] Blog section\r\n- [ ] Comments system\r\n- [ ] Dark mode improvements\r\n\r\n## Next Tasks\r\n\r\n1. Deploy to Vercel\r\n2. Add blog section\r\n3. Optimize images\r\n4. Add SEO improvements\r\n\r\n## Related Notes\r\n\r\n- [[Learning JavaScript]] - Frontend development\r\n- [[Web Development]] - General web concepts\r\n",
-      "tags": [
-        "project",
-        "web",
-        "portfolio"
-      ],
-      "links": [
-        "Learning JavaScript",
-        "Web Development"
-      ],
+      "content": "",
+      "tags": [],
+      "links": [],
       "isExcalidraw": false
     },
     {
-      "path": "Projects",
-      "name": "Projects",
+      "path": "Images/Pasted image 20260615012624.png",
+      "name": "Pasted image 20260615012624.png",
+      "type": "file",
+      "content": "",
+      "tags": [],
+      "links": [],
+      "isExcalidraw": false
+    },
+    {
+      "path": "Images/Pasted image 20260615014517.png",
+      "name": "Pasted image 20260615014517.png",
+      "type": "file",
+      "content": "",
+      "tags": [],
+      "links": [],
+      "isExcalidraw": false
+    },
+    {
+      "path": "Images/Pasted image 20260615014553.png",
+      "name": "Pasted image 20260615014553.png",
+      "type": "file",
+      "content": "",
+      "tags": [],
+      "links": [],
+      "isExcalidraw": false
+    },
+    {
+      "path": "LC",
+      "name": "LC",
       "type": "folder"
     },
     {
-      "path": "Projects/CDC-Pipeline.md",
-      "name": "CDC-Pipeline",
+      "path": "LC/207.md",
+      "name": "207",
       "type": "file",
-      "content": "\r\n# Sample CDC Pipeline\r\n\r\nA Change Data Capture (CDC) implementation for streaming database changes.\r\n\r\n## Overview\r\n\r\nThis project captures changes from a source database and publishes them as events to a message broker.\r\n\r\n## Architecture\r\n\r\n```\r\nSource DB → CDC Connector → Event Formatter → Kafka Topic → Consumer Applications\r\n```\r\n\r\n## Key Components\r\n\r\n### 1. CDC Connector\r\n- Polls database transaction logs\r\n- Detects INSERT, UPDATE, DELETE operations\r\n- Maintains LSN/SCN tracking\r\n\r\n### 2. Event Formatter\r\n- Converts database changes to JSON events\r\n- Adds metadata (timestamp, operation type)\r\n- Implements event schema\r\n\r\n### 3. Kafka Producer\r\n- Publishes events to Kafka topics\r\n- Ensures idempotency\r\n- Handles backpressure\r\n\r\n### 4. Consumer Applications\r\n- Subscribe to topics\r\n- Process events in order\r\n- Update local state\r\n\r\n## Technologies\r\n\r\n- Java 11+\r\n- Kafka/Confluent Platform\r\n- PostgreSQL/MySQL\r\n- Spring Boot\r\n\r\n## Setup\r\n\r\nSee [[Portfolio Project]] for setup instructions.\r\n\r\n## Status\r\n\r\n- [x] Initial implementation\r\n- [x] Error handling\r\n- [ ] Performance optimization\r\n- [ ] Monitoring and alerting\r\n",
-      "tags": [
-        "project",
-        "data",
-        "cdc"
-      ],
+      "content": "Question : \r\n![[Pasted image 20260614235240.png]]\r\n![[Pasted image 20260614235252.png]]\r\n\r\nWe want to find it is possible to finish all courses or not. If able to finish -> Give it's order \r\n\r\n**Solution** : \r\n\r\n[[Topological Order]]\r\n\r\ncode : \r\n```cpp\r\n#include<bits/stdc++.h>\r\nusing namespace std;\r\n\r\n  \r\n\r\nclass TS{\r\n\r\n    private:\r\n\r\n        int n;\r\n\r\n        vector<int> time_;\r\n\r\n        vector<vector<int>> prereqs;\r\n\r\n        vector<int> state;\r\n\r\n        vector<int> order;\r\n\r\n        bool hasCycle;\r\n\r\n  \r\n\r\n        void dfs(int node){\r\n\r\n            state[node] = 1;\r\n\r\n  \r\n\r\n            for(int pre : prereqs[node]){\r\n\r\n                if(state[pre] == 0){\r\n\r\n                    dfs(pre);\r\n\r\n                    if(hasCycle){\r\n\r\n                        return ;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n                else if(state[pre] == 1){\r\n\r\n                    hasCycle = 1;\r\n\r\n                    return;\r\n\r\n                }\r\n\r\n            }\r\n\r\n            state[node] = 2;\r\n\r\n            order.push_back(node);\r\n\r\n        }\r\n\r\n    public:\r\n\r\n        TS(int n, vector<int>& taskTimes, vector<vector<int>>& deps) : n(n), time_(taskTimes), prereqs(n), state(n,0), hasCycle(false){\r\n\r\n            for(auto& edge : deps){\r\n\r\n                int u = edge[0];\r\n\r\n                int v = edge[1];\r\n\r\n                prereqs[v].push_back(u);\r\n\r\n            }\r\n\r\n        }\r\n\r\n  \r\n\r\n        void solve(){\r\n\r\n            for(int i =0; i < n; i++){\r\n\r\n                if(state[i] == 0){\r\n\r\n                    dfs(i);\r\n\r\n                    if(hasCycle){\r\n\r\n                        cout << \"cycle\" << \"\\n\";\r\n\r\n                        return;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n            }\r\n\r\n            for (int node : order) cout << node << \" \";\r\n\r\n            cout << \"\\n\";\r\n\r\n        }\r\n\r\n};\r\n\r\n  \r\n\r\nint main(){\r\n\r\n    int n = 4;\r\n\r\n    vector<int> taskTimes = {3,2,4,5};\r\n\r\n  \r\n\r\n    vector<vector<int>> deps = {{0,2},{1,2},{2,3}};\r\n\r\n  \r\n\r\n    TS ts1(n, taskTimes, deps);\r\n\r\n    ts1.solve();\r\n\r\n}\r\n\r\n## Notes\r\n\r\n- prereqs[v] stores prerequisites of v\r\n\r\n- 3 states: 0=unvisited, 1=visiting, 2=done\r\n\r\n- state[pre]==1 → back edge → cycle\r\n\r\n- state[pre]==2 → cross edge → skip\r\n  \r\n```\r\n\r\nHow to write code :\r\n1. start with main and call the object and solve() method\r\n2. Class and define public method - constructor to initialize data and solve method that we called\r\n3. solve() uses private data and private helper method dfs()\r\n\r\n\r\nBy Solving and writing more dfs : I can get better\r\n\r\nQuestion 2 : They are telling, They can do tasks parllely \r\n\r\nso, what's the difference -> There is no difference with topological order \r\n\r\nIf they ask Time Taken to finish all tasks then before It is summation of all tasks are courses but If you can execute tasks parllely then you do all prerequisite tasks parllely and inorder to do the main task -> How much time it should wait is max(Time taken by prerequisite tasks). once all prerequisite tasks are done -> main task can be done\r\n\r\nwhat changes to do in code\r\n![[Pasted image 20260615005709.png]]\r\n\r\nSolution 2 :\r\n\r\nIt's almost same but BFS \r\nwe start with nodes that has no prerequisites and go on layer by layer\r\nIndegree : No of Pre-requisite tasks\r\n\r\nstart with 0 indegree tasks \r\nreduce -1 to it's parent when this task is done and do next 0 indegree task and go on until all are finished \r\n\r\nHow do we find a cycle : Think there is a cycle then those nodes indegrees can never become 0 as they have a deadlock and we only go through nodes than we can traverse or indegrees become 0\r\n\r\nwhat essentially we are doing is -> we are traversing what ever nodes we can \r\n\r\n![[Pasted image 20260615012624.png|480]]\r\n\r\n```cpp\r\n\r\n#include <bits/stdc++.h>\r\nusing namespace std;\r\n\r\nclass TaskSchedulerKahn {\r\nprivate:\r\n    int n;\r\n    vector<int> time_;\r\n    vector<vector<int>> graph; // Forward graph: u -> dependents\r\n    vector<int> indegree;\r\n\r\npublic:\r\n    TaskSchedulerKahn(int n, vector<int>& taskTimes, vector<vector<int>>& deps)\r\n        : n(n), time_(taskTimes), graph(n), indegree(n, 0) {\r\n        \r\n        // Build graph and indegree count\r\n        for (const auto& edge : deps) {\r\n            int u = edge[0]; // prerequisite\r\n            int v = edge[1]; // dependent\r\n            graph[u].push_back(v);\r\n            indegree[v]++;\r\n        }\r\n    }\r\n\r\n    void solveSequential() {\r\n        queue<int> q;\r\n        // Add all nodes with no prerequisites to the queue\r\n        for (int i = 0; i < n; ++i) {\r\n            if (indegree[i] == 0) {\r\n                q.push(i);\r\n            }\r\n        }\r\n\r\n        vector<int> topoOrder;\r\n        while (!q.empty()) {\r\n            int u = q.front();\r\n            q.pop();\r\n            topoOrder.push_back(u);\r\n\r\n            // \"Complete\" task u, so reduce indegree of its dependents\r\n            for (int v : graph[u]) {\r\n                indegree[v]--;\r\n                if (indegree[v] == 0) {\r\n                    q.push(v);\r\n                }\r\n            }\r\n        }\r\n\r\n        if (topoOrder.size() < n) {\r\n            cout << \"Result: -1 (cycle detected)\\n\";\r\n        } else {\r\n            int totalTime = 0;\r\n            for (int t : time_) totalTime += t;\r\n\r\n            cout << \"Execution Order: \";\r\n            for (int node : topoOrder) cout << node << \" \";\r\n            cout << \"\\n\";\r\n\r\n            cout << \"Total Sequential Time: \" << totalTime << \"\\n\";\r\n        }\r\n    }\r\n};\r\n\r\nint main() {\r\n    int n = 4;\r\n    vector<int> taskTimes = {3, 2, 4, 5};\r\n    vector<vector<int>> deps = {{0, 2}, {1, 2}, {2, 3}};\r\n\r\n    cout << \"=== Kahn's Algorithm - No Cycle Case ===\\n\";\r\n    TaskSchedulerKahn ts1(n, taskTimes, deps);\r\n    ts1.solveSequential();\r\n\r\n    cout << \"\\n=== Kahn's Algorithm - Cycle Case ===\\n\";\r\n    vector<vector<int>> cyclicDeps = {{0, 1}, {1, 2}, {2, 0}};\r\n    TaskSchedulerKahn ts2(3, taskTimes, cyclicDeps); // Using 3 nodes for this cycle\r\n    ts2.solveSequential();\r\n\r\n    return 0;\r\n}\r\n\r\n```\r\n\r\nParllel :\r\n\r\nIntialise time for indegree - 0 nodes and every time an indegree 0 node traverses through it's dependents we update maximum and also include it's own time \r\nwe can initialise time_ for all i and then update maximum like that\r\n\r\n[[207]][[Topological Order]][[DFS]][[Khan's Algorithm]][[BFS]]\r\n\r\n",
+      "tags": [],
       "links": [
-        "Portfolio Project"
+        "Pasted image 20260614235240.png",
+        "Pasted image 20260614235252.png",
+        "Topological Order",
+        "Pasted image 20260615005709.png",
+        "Pasted image 20260615012624.png|480",
+        "207",
+        "Topological Order",
+        "DFS",
+        "Khan's Algorithm",
+        "BFS"
       ],
       "isExcalidraw": false
     },
     {
-      "path": "README.md",
-      "name": "README",
+      "path": "LC/815.md",
+      "name": "815",
       "type": "file",
-      "content": "# Welcome to My Vault 🧠\r\n\r\nThis is my personal digital knowledge management system - my second brain. Here you'll find:\r\n\r\n- **Notes** - My learning journey and knowledge base\r\n- **Projects** - Project-specific documentation\r\n- **Excalidraw** - Visual diagrams and sketches\r\n- And more...\r\n\r\n## Quick Navigation\r\n\r\n- Explore the file tree on the left\r\n- Search for notes using the search bar\r\n- Click on tags to filter by topic\r\n- View markdown content with full formatting\r\n\r\n## Getting Started\r\n\r\n1. Add your own notes to the vault folder\r\n2. Use tags in your frontmatter for better organization\r\n3. Link notes together with `[[wiki links]]`\r\n4. Enjoy your knowledge graph! 📚\r\n\r\n---\r\n\r\n**Last Updated:** 2026-06-16\r\n",
+      "content": "![[Pasted image 20260615014517.png|590]]\r\n![[Pasted image 20260615014553.png]]\r\n\r\nThoughts : This looks like some shortest path problem type but each component having multiple formats instead of not just 1 format\r\n\r\nToolA : [pdf, docx, txt] -> Layer 1\r\nIf there is any nodes connected Layer 1 then they become -> Layer 2\r\nand so \r\n\r\n\r\n",
       "tags": [],
       "links": [
-        "wiki links"
+        "Pasted image 20260615014517.png|590",
+        "Pasted image 20260615014553.png"
+      ],
+      "isExcalidraw": false
+    },
+    {
+      "path": "LC/I-1.md",
+      "name": "I-1",
+      "type": "file",
+      "content": "https://leetcode.com/discuss/post/8329811/nexturn-senior-java-developer-offer-by-a-v7t0/\r\n\r\n[[kafka]][[Design Patterns]][[Database]][[General Questions]]\r\n\r\n",
+      "tags": [],
+      "links": [
+        "kafka",
+        "Design Patterns",
+        "Database",
+        "General Questions"
+      ],
+      "isExcalidraw": false
+    },
+    {
+      "path": "LC/Introduction & Project Explaination.md",
+      "name": "Introduction & Project Explaination",
+      "type": "file",
+      "content": "",
+      "tags": [],
+      "links": [],
+      "isExcalidraw": false
+    },
+    {
+      "path": "LC/Spring Concepts.md",
+      "name": "Spring Concepts",
+      "type": "file",
+      "content": "**jar dependencies**\r\nTomcat server\r\nSpring MVC\r\nbeans\r\njpa\r\nhibernate - ddl\r\ndatasource - jdbc \r\nserver.port\r\nDependecy Injection\r\n\r\n\r\nhttps://leetcode.com/discuss/post/8329847/citi-senior-java-developer-rejected-by-a-jkl6/\r\n\r\n[[spring boot]]\r\n",
+      "tags": [],
+      "links": [
+        "spring boot"
       ],
       "isExcalidraw": false
     }

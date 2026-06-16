@@ -4,13 +4,21 @@ import { loadVaultManifest } from '@/lib/vault-utils';
 export default function VaultHomePage() {
   const manifest = loadVaultManifest();
 
-  // Redirect to README if it exists
+  // Redirect to README if it exists, otherwise first file that's not an image
   const readme = manifest.files.find(
     (f) => f.type === 'file' && (f.path === 'README.md' || f.name.toLowerCase() === 'readme'),
   );
 
   if (readme) {
     redirect(`/vault/${readme.path}`);
+  }
+
+  // Skip image-only files, pick first readable note
+  const firstNote = manifest.files.find(
+    (f) => f.type === 'file' && f.path.endsWith('.md') && !f.path.startsWith('Images/'),
+  );
+  if (firstNote) {
+    redirect(`/vault/${firstNote.path}`);
   }
 
   // Otherwise show first file

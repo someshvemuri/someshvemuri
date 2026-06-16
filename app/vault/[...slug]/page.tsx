@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Home, ChevronRight, ImageIcon } from 'lucide-react';
 import Link from 'next/link';
-import { loadVaultManifest, getFileBySlug, extractHeadings, buildBreadcrumb, getAllVaultPaths } from '@/lib/vault-utils';
+import { loadVaultManifest, getFileBySlug, extractHeadings, buildBreadcrumb, getAllVaultPaths, buildWikiLinkMap } from '@/lib/vault-utils';
 import VaultContent from '@/components/vault/VaultContent';
 import VaultTOC from '@/components/vault/VaultTOC';
 
@@ -116,6 +116,7 @@ export default function VaultFilePage({ params }: PageProps) {
 
   // Markdown file
   const headings = extractHeadings(file.content ?? '');
+  const wikiLinkMap = buildWikiLinkMap(manifest.files);
 
   return (
     <div className="flex">
@@ -152,7 +153,7 @@ export default function VaultFilePage({ params }: PageProps) {
         )}
 
         {/* Markdown content */}
-        <VaultContent content={file.content ?? ''} />
+        <VaultContent content={file.content ?? ''} wikiLinkMap={wikiLinkMap} />
       </main>
 
       {/* TOC */}

@@ -1,0 +1,208 @@
+{
+  "main": {
+    "id": "6c51917f15ac1005",
+    "type": "split",
+    "children": [
+      {
+        "id": "b99c33369786acde",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "88c11cf5a8e8073a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LC/815.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "815"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9fd8c6c861398627",
+    "type": "split",
+    "children": [
+      {
+        "id": "e25b6fe13f579133",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "afc3e1f667fe6404",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b309cdf2b941049f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "1162e9c1b5c3651f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b0f54d1684d35494",
+    "type": "split",
+    "children": [
+      {
+        "id": "bf83dc7c607d92a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "99eb4bdf3987d42e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "LC/I-1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for I-1"
+            }
+          },
+          {
+            "id": "c50093710d5bd658",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "LC/I-1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from I-1"
+            }
+          },
+          {
+            "id": "e0191bcb0636bc72",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "4966723d408a4360",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "4ef35c854d28beab",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "LC/I-1.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of I-1"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
+    }
+  },
+  "active": "afc3e1f667fe6404",
+  "lastOpenFiles": [
+    "Images/Pasted image 20260615014553.png",
+    "Images/Pasted image 20260615014517.png",
+    "LC/815.md",
+    "LC/207.md",
+    "Excalidraw/Topological Order.md",
+    "Images/Pasted image 20260615012624.png",
+    "Images/Pasted image 20260615005709.png",
+    "Untitled.md",
+    "Excalidraw/Drawing 2026-06-14 23.55.00.excalidraw.md",
+    "Images",
+    "Excalidraw",
+    "Images/Pasted image 20260614235252.png",
+    "Images/Pasted image 20260614235240.png",
+    "LC/I-1.md",
+    "LC/Spring Concepts.md",
+    "LC/Introduction & Project Explaination.md",
+    "LC",
+    "Welcome.md"
+  ]
+}

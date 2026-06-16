@@ -41,6 +41,8 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
     files.filter((f) => {
       const parts = f.path.split('/');
       const parent = parts.slice(0, -1).join('/');
+      // Hide raw image files from the tree
+      if (f.path.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i)) return false;
       return parent === parentPath;
     });
 
@@ -92,7 +94,9 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
     );
   };
 
-  const rootItems = files.filter((f) => !f.path.includes('/'));
+  const rootItems = files.filter(
+    (f) => !f.path.includes('/') && f.path !== 'Images',
+  );
 
   return (
     <aside className="w-60 flex-shrink-0 h-screen sticky top-0 overflow-y-auto bg-[#0d1117] border-r border-[#21262d] flex flex-col">
@@ -100,7 +104,7 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
       <div className="p-4 border-b border-[#21262d]">
         <Link href="/vault" className="flex items-center gap-2 text-white font-semibold hover:opacity-80">
           <BookOpen className="w-5 h-5 text-[#58a6ff]" />
-          <span>Somesh's Vault</span>
+          <span>Somesh&apos;s Vault</span>
         </Link>
       </div>
 
