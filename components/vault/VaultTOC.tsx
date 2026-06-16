@@ -36,20 +36,20 @@ export default function VaultTOC({ headings }: VaultTOCProps) {
   if (headings.length === 0) return null;
 
   return (
-    <aside className="w-52 flex-shrink-0 h-screen sticky top-0 overflow-y-auto hidden xl:block">
-      <div className="p-6">
-        <p className="text-xs font-semibold text-[#8b949e] uppercase tracking-widest mb-4">On This Page</p>
-        <nav className="space-y-1">
+    <aside className="w-48 flex-shrink-0 h-screen sticky top-0 overflow-y-auto hidden xl:block bg-[#1a1a1a]">
+      <div className="p-5 pt-8">
+        <p className="text-xs text-[#555] uppercase tracking-widest mb-4 font-mono">ON THIS PAGE</p>
+        <nav className="space-y-0.5">
           {headings.map((h) => (
             <a
               key={h.slug}
               href={`#${h.slug}`}
-              className={`block text-sm transition-colors leading-snug py-0.5 ${
+              className={`block text-xs font-mono transition-colors leading-relaxed py-0.5 ${
                 activeSlug === h.slug
-                  ? 'text-[#58a6ff] font-medium'
-                  : 'text-[#8b949e] hover:text-[#c9d1d9]'
+                  ? 'text-[#e0e0e0] font-semibold'
+                  : 'text-[#666] hover:text-[#aaa]'
               }`}
-              style={{ paddingLeft: h.level === 1 ? 0 : h.level === 2 ? '0' : '12px' }}
+              style={{ paddingLeft: h.level === 1 ? 0 : h.level === 2 ? '0' : '10px' }}
               onClick={() => setActiveSlug(h.slug)}
             >
               {h.text}

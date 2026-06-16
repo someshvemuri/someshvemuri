@@ -47,6 +47,27 @@ export default function VaultFilePage({ params }: PageProps) {
 
   const breadcrumbs = buildBreadcrumb(normalizedSlug);
 
+  // Shared breadcrumb component
+  const Breadcrumb = () => (
+    <nav className="flex items-center gap-1.5 text-xs text-[#555] mb-8 flex-wrap font-mono">
+      <Link href="/vault/my-vault" className="hover:text-[#aaa] transition-colors">
+        <Home className="w-3 h-3 inline" />
+      </Link>
+      {breadcrumbs.slice(1).map((crumb, i) => (
+        <span key={crumb.href} className="flex items-center gap-1.5">
+          <ChevronRight className="w-3 h-3 opacity-40" />
+          {i === breadcrumbs.length - 2 ? (
+            <span className="text-[#aaa] capitalize">{crumb.label}</span>
+          ) : (
+            <Link href={crumb.href} className="hover:text-[#aaa] transition-colors capitalize">
+              {crumb.label}
+            </Link>
+          )}
+        </span>
+      ))}
+    </nav>
+  );
+
   // Folder view: list children
   if (file.type === 'folder') {
     const children = manifest.files.filter((f) => {
@@ -57,36 +78,18 @@ export default function VaultFilePage({ params }: PageProps) {
 
     return (
       <div className="flex">
-        <main className="flex-1 min-w-0 max-w-4xl px-8 py-10">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-            <Link href="/vault/my-vault" className="hover:text-white transition-colors">
-              <Home className="w-3.5 h-3.5" />
-            </Link>
-            {breadcrumbs.slice(1).map((crumb, i) => (
-              <span key={crumb.href} className="flex items-center gap-1.5">
-                <ChevronRight className="w-3.5 h-3.5" />
-                {i === breadcrumbs.length - 2 ? (
-                  <span className="text-[#e6edf3]">{crumb.label}</span>
-                ) : (
-                  <Link href={crumb.href} className="hover:text-white transition-colors capitalize">
-                    {crumb.label}
-                  </Link>
-                )}
-              </span>
-            ))}
-          </nav>
-
-          <h1 className="text-2xl font-semibold text-[#e6edf3] mb-6">{file.name}</h1>
-          <div className="grid gap-3">
+        <main className="flex-1 min-w-0 max-w-3xl px-10 py-10 font-mono">
+          <Breadcrumb />
+          <h1 className="text-xl font-semibold text-[#e0e0e0] mb-6">{file.name}</h1>
+          <div className="grid gap-1">
             {children.map((child) => (
               <Link
                 key={child.path}
                 href={`/vault/my-vault/${child.path}`}
-                className="flex items-center gap-3 p-4 rounded-lg border border-[#21262d] hover:border-[#388bfd] hover:bg-[#161b22] transition-all text-[#8b949e] hover:text-white"
+                className="flex items-center py-2 px-3 text-sm text-[#888] hover:text-[#d4d4d4] hover:bg-[#242424] rounded transition-all"
               >
-                <span className="capitalize font-medium">{child.name}</span>
-                <ChevronRight className="w-4 h-4 ml-auto opacity-50" />
+                <span className="capitalize">{child.name}</span>
+                <ChevronRight className="w-3.5 h-3.5 ml-auto opacity-40" />
               </Link>
             ))}
           </div>
@@ -100,45 +103,22 @@ export default function VaultFilePage({ params }: PageProps) {
     const excalidrawHeadings = extractHeadings(file.content ?? '');
     return (
       <div className="flex">
-        <main className="flex-1 min-w-0 px-8 py-10 overflow-hidden">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-            <Link href="/vault/my-vault" className="hover:text-white transition-colors">
-              <Home className="w-3.5 h-3.5" />
-            </Link>
-            {breadcrumbs.slice(1).map((crumb, i) => (
-              <span key={crumb.href} className="flex items-center gap-1.5">
-                <ChevronRight className="w-3.5 h-3.5" />
-                {i === breadcrumbs.length - 2 ? (
-                  <span className="text-[#e6edf3] capitalize">{crumb.label}</span>
-                ) : (
-                  <Link href={crumb.href} className="hover:text-white transition-colors capitalize">
-                    {crumb.label}
-                  </Link>
-                )}
-              </span>
-            ))}
-          </nav>
-
-          {/* Title + badge */}
+        <main className="flex-1 min-w-0 px-10 py-10 overflow-hidden font-mono">
+          <Breadcrumb />
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl font-semibold text-[#e6edf3]">{file.name}</h1>
-            <span className="text-xs bg-[#161b22] border border-[#30363d] text-[#8b949e] px-2 py-0.5 rounded-full">
-              Excalidraw
-            </span>
+            <h1 className="text-xl font-semibold text-[#e0e0e0]">{file.name}</h1>
+            <span className="text-xs text-[#555] border border-[#333] px-2 py-0.5 rounded">Excalidraw</span>
           </div>
-          <p className="text-sm text-[#8b949e] mb-8">
-            Interactive diagram — open in Obsidian to view the drawing. Text elements extracted below.
+          <p className="text-xs text-[#555] mb-8">
+            Interactive diagram — open in Obsidian to view the drawing. Text elements below.
           </p>
-
-          {/* Text elements from the diagram */}
           {file.content ? (
-            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6 text-[#c9d1d9] text-sm leading-relaxed whitespace-pre-wrap font-mono">
+            <pre className="bg-[#1e1e1e] border-l-2 border-[#444] p-5 text-[#d4d4d4] text-sm leading-relaxed whitespace-pre-wrap overflow-x-auto">
               {file.content}
-            </div>
+            </pre>
           ) : (
-            <div className="border border-[#21262d] rounded-xl p-8 bg-[#161b22] text-center text-[#8b949e]">
-              <ImageIcon className="w-12 h-12 mx-auto mb-4 opacity-40" />
+            <div className="p-8 text-center text-[#555] border border-[#2a2a2a] rounded">
+              <ImageIcon className="w-10 h-10 mx-auto mb-3 opacity-30" />
               <p className="text-sm">No text elements found in this diagram.</p>
             </div>
           )}
@@ -155,31 +135,14 @@ export default function VaultFilePage({ params }: PageProps) {
   return (
     <div className="flex">
       {/* Main Content */}
-      <main className="flex-1 min-w-0 px-8 py-10 overflow-hidden">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-1.5 text-sm text-[#8b949e] mb-8 flex-wrap">
-          <Link href="/vault/my-vault" className="hover:text-white transition-colors">
-            <Home className="w-3.5 h-3.5" />
-          </Link>
-          {breadcrumbs.slice(1).map((crumb, i) => (
-            <span key={crumb.href} className="flex items-center gap-1.5">
-              <ChevronRight className="w-3.5 h-3.5" />
-              {i === breadcrumbs.length - 2 ? (
-                <span className="text-[#e6edf3] capitalize">{crumb.label}</span>
-              ) : (
-                <Link href={crumb.href} className="hover:text-white transition-colors capitalize">
-                  {crumb.label}
-                </Link>
-              )}
-            </span>
-          ))}
-        </nav>
+      <main className="flex-1 min-w-0 px-10 py-10 overflow-hidden">
+        <Breadcrumb />
 
         {/* Tags */}
         {file.tags && file.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {file.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-[#161b22] border border-[#30363d] text-[#58a6ff] px-2.5 py-1 rounded-full">
+              <span key={tag} className="text-xs text-[#666] border border-[#333] px-2.5 py-0.5 rounded font-mono">
                 #{tag}
               </span>
             ))}

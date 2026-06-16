@@ -52,28 +52,30 @@ export default function VaultContent({ content, wikiLinkMap }: VaultContentProps
   return (
     <div className="vault-content max-w-none">
       <style>{`
-        .vault-content { color: #c9d1d9; font-size: 0.9375rem; line-height: 1.75; }
-        .vault-content h1 { font-size: 1.75rem; font-weight: 600; color: #e6edf3; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #21262d; }
-        .vault-content h2 { font-size: 1.35rem; font-weight: 600; color: #e6edf3; margin: 1.75rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid #21262d; }
-        .vault-content h3 { font-size: 1.1rem; font-weight: 600; color: #e6edf3; margin: 1.5rem 0 0.5rem; }
-        .vault-content h4, .vault-content h5, .vault-content h6 { font-weight: 600; color: #e6edf3; margin: 1rem 0 0.5rem; }
-        .vault-content p { margin: 0.75rem 0; }
-        .vault-content a { color: #58a6ff; text-decoration: none; }
-        .vault-content a:hover { text-decoration: underline; }
-        .vault-content code { background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 0.15em 0.4em; font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 0.85em; color: #ff7b72; }
-        .vault-content pre { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem; overflow-x: auto; margin: 1.25rem 0; }
-        .vault-content pre code { background: none; border: none; padding: 0; color: #c9d1d9; font-size: 0.875rem; }
-        .vault-content blockquote { border-left: 3px solid #388bfd; padding-left: 1rem; color: #8b949e; margin: 1rem 0; background: #161b22; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; }
+        .vault-content { color: #d4d4d4; font-size: 1rem; line-height: 1.85; font-family: 'Courier New', 'Courier', monospace; max-width: 720px; }
+        .vault-content h1 { font-size: 1.5rem; font-weight: 700; color: #f0f0f0; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .vault-content h2 { font-size: 1.2rem; font-weight: 600; color: #e8e8e8; margin: 2rem 0 0.6rem; }
+        .vault-content h3 { font-size: 1.05rem; font-weight: 600; color: #e0e0e0; margin: 1.5rem 0 0.5rem; }
+        .vault-content h4, .vault-content h5, .vault-content h6 { font-weight: 600; color: #e0e0e0; margin: 1.2rem 0 0.4rem; }
+        .vault-content p { margin: 0.9rem 0; color: #d4d4d4; }
+        .vault-content a { color: #79b8ff; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+        .vault-content a:hover { border-bottom-color: #79b8ff; }
+        .vault-content code { background: #2a2a2a; border-radius: 3px; padding: 0.15em 0.45em; font-family: 'Courier New', monospace; font-size: 0.875em; color: #e2a0a0; }
+        .vault-content pre { background: #1e1e1e; border-left: 3px solid #444; border-radius: 0; padding: 1.25rem 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+        .vault-content pre code { background: none; padding: 0; color: #d4d4d4; font-size: 0.875rem; }
+        .vault-content blockquote { border-left: 3px solid #555; padding: 0.5rem 1rem; color: #999; margin: 1.2rem 0; font-style: italic; }
         .vault-content ul, .vault-content ol { padding-left: 1.5rem; margin: 0.75rem 0; }
-        .vault-content li { margin: 0.4rem 0; }
-        .vault-content li > ul, .vault-content li > ol { margin: 0.25rem 0; }
-        .vault-content table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.875rem; }
-        .vault-content th { background: #161b22; border: 1px solid #30363d; padding: 0.6rem 0.8rem; text-align: left; color: #e6edf3; font-weight: 600; }
-        .vault-content td { border: 1px solid #30363d; padding: 0.6rem 0.8rem; }
-        .vault-content tr:nth-child(even) td { background: #0d1117; }
-        .vault-content img { max-width: 100%; border-radius: 8px; border: 1px solid #30363d; margin: 1rem 0; }
-        .vault-content hr { border: none; border-top: 1px solid #21262d; margin: 2rem 0; }
-        .vault-content input[type="checkbox"] { margin-right: 0.5rem; }
+        .vault-content li { margin: 0.35rem 0; color: #d4d4d4; }
+        .vault-content li > ul, .vault-content li > ol { margin: 0.2rem 0; }
+        .vault-content table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: 0.9rem; }
+        .vault-content th { background: #222; border: 1px solid #333; padding: 0.5rem 0.8rem; text-align: left; color: #e8e8e8; font-weight: 600; }
+        .vault-content td { border: 1px solid #333; padding: 0.5rem 0.8rem; color: #d4d4d4; }
+        .vault-content tr:nth-child(even) td { background: #1e1e1e; }
+        .vault-content img { max-width: 100%; border-radius: 4px; margin: 1.2rem 0; }
+        .vault-content hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
+        .vault-content input[type="checkbox"] { margin-right: 0.5rem; accent-color: #79b8ff; }
+        .vault-content strong { color: #f0f0f0; }
+        .vault-content em { color: #c0c0c0; }
       `}</style>
 
       <ReactMarkdown

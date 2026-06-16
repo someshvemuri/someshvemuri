@@ -11,7 +11,7 @@ export default function VaultLayout({ children }: { children: React.ReactNode })
   const manifest = loadVaultManifest();
 
   return (
-    <div className="flex min-h-screen bg-[#0d1117] text-[#c9d1d9]">
+    <div className="flex min-h-screen bg-[#1a1a1a] text-[#d4d4d4] font-mono">
       <VaultSidebar files={manifest.files} />
       <div className="flex-1 min-w-0">
         {children}

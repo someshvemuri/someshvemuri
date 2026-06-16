@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronRight, FileText, Folder, FolderOpen, BookOpen } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import type { VaultFile } from '@/lib/vault-utils';
 
 interface VaultSidebarProps {
@@ -69,30 +69,24 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
         {file.type === 'folder' ? (
           <button
             onClick={() => toggleFolder(file.path)}
-            className="w-full flex items-center gap-1.5 px-3 py-1.5 text-sm text-left transition-colors hover:text-white text-[#8b949e]"
-            style={{ paddingLeft: `${depth * 12 + 12}px` }}
+            className="w-full flex items-center gap-1 py-1 text-sm text-left transition-colors text-[#999] hover:text-[#e0e0e0]"
+            style={{ paddingLeft: `${depth * 14 + 16}px` }}
           >
             <ChevronRight
-              className={`w-3.5 h-3.5 flex-shrink-0 transition-transform duration-150 ${isExpanded ? 'rotate-90' : ''}`}
+              className={`w-3 h-3 flex-shrink-0 transition-transform duration-150 opacity-60 ${isExpanded ? 'rotate-90' : ''}`}
             />
-            {isExpanded ? (
-              <FolderOpen className="w-3.5 h-3.5 flex-shrink-0 text-[#e3b341]" />
-            ) : (
-              <Folder className="w-3.5 h-3.5 flex-shrink-0 text-[#e3b341]" />
-            )}
             <span className="truncate font-medium">{file.name}</span>
           </button>
         ) : (
           <Link
             href={`/vault/my-vault/${file.path}`}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm transition-colors ${
+            className={`flex items-center py-1 text-sm transition-colors ${
               active
-                ? 'text-white bg-[#1f6feb]/20 border-r-2 border-[#1f6feb]'
-                : 'text-[#8b949e] hover:text-white hover:bg-white/5'
+                ? 'text-[#f0f0f0] font-medium bg-[#2a2a2a]'
+                : 'text-[#888] hover:text-[#d4d4d4]'
             }`}
-            style={{ paddingLeft: `${depth * 12 + 24}px` }}
+            style={{ paddingLeft: `${depth * 14 + 28}px` }}
           >
-            <FileText className={`w-3.5 h-3.5 flex-shrink-0 ${active ? 'text-[#58a6ff]' : 'text-[#8b949e]'}`} />
             <span className="truncate">{file.name}</span>
           </Link>
         )}
@@ -107,28 +101,27 @@ export default function VaultSidebar({ files }: VaultSidebarProps) {
   );
 
   return (
-    <aside className="w-60 flex-shrink-0 h-screen sticky top-0 overflow-y-auto bg-[#0d1117] border-r border-[#21262d] flex flex-col">
+    <aside className="w-52 flex-shrink-0 h-screen sticky top-0 overflow-y-auto bg-[#1a1a1a] border-r border-[#2a2a2a] flex flex-col font-mono">
       {/* Logo / Title */}
-      <div className="p-4 border-b border-[#21262d]">
-        <Link href="/vault/my-vault" className="flex items-center gap-2 text-white font-semibold hover:opacity-80">
-          <BookOpen className="w-5 h-5 text-[#58a6ff]" />
-          <span>Somesh&apos;s Vault</span>
+      <div className="px-4 py-4 border-b border-[#2a2a2a]">
+        <Link href="/vault/my-vault" className="text-[#e0e0e0] font-semibold text-sm hover:text-white transition-colors">
+          Somesh&apos;s Vault
         </Link>
       </div>
 
       {/* Back to portfolio */}
-      <div className="px-3 pt-3">
+      <div className="px-4 pt-3 pb-1">
         <Link
           href="/"
-          className="text-xs text-[#8b949e] hover:text-white flex items-center gap-1 px-2 py-1 rounded transition-colors hover:bg-white/5"
+          className="text-xs text-[#666] hover:text-[#aaa] transition-colors"
         >
-          &larr; Back to Portfolio
+          &larr; portfolio
         </Link>
       </div>
 
       {/* File tree */}
-      <nav className="flex-1 pt-4 pb-8">
-        <p className="px-4 pb-2 text-xs font-semibold text-[#8b949e] uppercase tracking-widest">Content</p>
+      <nav className="flex-1 pt-3 pb-8">
+        <p className="px-4 pb-2 text-xs text-[#555] uppercase tracking-widest">CONTENT</p>
         {rootItems.map((file) => renderNode(file))}
       </nav>
     </aside>
